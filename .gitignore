@@ -1,0 +1,15 @@
+# Ignore audio files
+*.wav
+audio_test/
+
+# Ignore metadata files
+*.csv
+*.xlsx
+
+# Ignore virtual environments and package caches
+.DS_Store
+__pycache__/
+.venv/
+
+
+
