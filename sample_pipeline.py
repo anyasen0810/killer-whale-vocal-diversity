@@ -180,7 +180,7 @@ if result["status"] == "SUCCESS":
 
     # saving as audio file to make sure vocalisation weren't cut out 
     export_path = (
-        "/Users/anyasen/Documents/project/audio_tests/test_file_preproc.wav"
+        "/Users/anyasen/Documents/project/test_file_preproc.wav"
     )
     sf.write(export_path, clean_audio_array, 32000)
 
@@ -223,7 +223,7 @@ if result["status"] == "SUCCESS":
 else: 
     print("Pipeline failed")
 
-   
+
 
 
 
