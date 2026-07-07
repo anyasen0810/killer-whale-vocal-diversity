@@ -13,8 +13,9 @@ os.makedirs(local_data_dir, exist_ok=True)
 csv_filename = "dclde_2027_dclde_2027_killer_whales_Annotations.csv"
 df = pd.read_csv(csv_filename)
 
-# identifying files with killer whale calls
-kw_files = df[df["ClassSpecies"] == "KW"]["Soundfile"].dropna().unique()
+# identifying files with killer whale calls and subpopulation data
+cleaned_df = df[(df["ClassSpecies"] == "KW") & (df["ecotype"].notna())]
+kw_files = cleaned_df["Soundfile"].unique()
 # counting number of files with killer whale calls in total
 print(f"Total unique killer whale files available: {len(kw_files)}")
 
@@ -54,10 +55,10 @@ for idx, filename in enumerate(files_to_download, 1):
 			os.remove(local_flac_path)
 
 		else:
-			print("Could not find {base_name} as .wav or .flac on cloud.")
+			print(f"Could not find {base_name} as .wav or .flac on cloud.")
 
 	except Exception as e:
-        	print(f"Error processing {base_name}: {e}")
+    	print(f"Error processing {base_name}: {e}")
 
 print("Download complete.")
 
