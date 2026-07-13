@@ -17,6 +17,7 @@ output_dir = os.path.join(base_dir, "features")
 
 os.makedirs(output_dir, exist_ok = True)
 output_file = os.path.join(base_dir, "perch_embeddings.csv")
+annotations_path = os.path.join(base_dir, "Annotations.csv")
 
 # Downloading optimised perch model
 model_path = os.path.join(base_dir, "perch_v2.onnx")
@@ -76,6 +77,24 @@ for idx, file_path in enumerate(clip_files):
     
 # saving dictionary as dataframe
 embeddings_df = pd.DataFrame(all_embeddings)
+
+# merging embeddings with subpopulation data
+if os.path.exists(annotations_path):
+    # reading annotions file to extract subpopulation data  
+    df_annotations = pd.read(annotations_path)
+    # identifying columns with filename and subpopulation data 
+    df_labels = df_annotations['SoundFile', 'Ecotype']
+
+    embeddings_df = pd.merge(embeddings_df, 
+                    df_labels,
+                    left_on = 'Filename', 
+                    right_on = 'SoundFile',
+                    how = 'inner')
+    embeddings_df = embeddings_df.drop(columns = ['SoundFile'])
+
+    print(f"Matched and added subpopulation labels")
+else:
+    print(f"Could not find annotation file.")
 
 # saving dataframe as .csv file for further inspection
 embeddings_df.to_csv(output_dir, index= False)
