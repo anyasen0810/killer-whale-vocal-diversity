@@ -1,7 +1,8 @@
 import numpy as np
 from sklearn.metrics.pairwise import rbf_kernel
+import pandas as pd
 
-# defining function that caculates MMD between two distributions 
+# defining function that calculates MMD between two distributions 
 def calculate_single_mmd(X,Y, gamma = None):
     if gamma is None:
         gamma = 1.0/X.shape[1] # scaling bandwidth with size of vector 
@@ -26,3 +27,44 @@ def calculate_single_mmd(X,Y, gamma = None):
 
     # returning MMD distance between the subpopulations
     return n_XX + n_YY - 2 * n_XY   
+
+# loading embeddings data
+embeddings_df = pd.read_csv("auto_features.csv") # double check name 
+
+# identifying subpopulation column 
+subpop_column = "Ecotype"
+
+# getting list of all subpops present in the data
+subpops = embeddings_df[subpop_column].unique()
+# getting number of subpopulations 
+n_subpops = len(subpops)
+
+acoustic_data = {}
+
+for subpop in subpops:
+    # identifying rows belonging to single subpopulation 
+    subpop_rows = embeddings_df[embeddings_df[subpop_column] == subpop]
+
+    features_only = subpop_rows.drop(columns = [subpop_column]).to_numpy
+
+    acoustic_data[subpop] = features_only
+    print(f"{subpop} data loaded. Shape of feature matrix is {features_only.shape}")
+
+# creating empty matrix for MMD scores
+mmd_matrix = np.zeros((n_subpops, n_subpops))
+
+# using MMD function to fill in empty matrix
+for i in range(n_subpops):
+    for j in range(i, n_subpops):
+        # skipping mmd calculation if subpop is being compared against itself 
+        if i == j:
+            mmd_matrix[i, j] = 0.0
+        else:
+            # calculate_mmd is the function from our previous step
+            dist = calculate_single_mmd(acoustic_data[subpops[i]], acoustic_data[subpops[j]])
+            mmd_matrix[i, j] = dist
+            # mirroring the distance to prevent mmd being calculated twice for same pair of subpops
+            mmd_matrix[j, i] = dist  
+
+df_acoustic_mmd = pd.DataFrame(mmd_matrix, index=subpops, columns=subpops)
+print(df_acoustic_mmd)
