@@ -29,7 +29,7 @@ def calculate_single_mmd(X,Y, gamma = None):
     return n_XX + n_YY - 2 * n_XY   
 
 # loading embeddings data
-embeddings_df = pd.read_csv("auto_features.csv") # double check name 
+embeddings_df = pd.read_csv("features.csv") # double check name 
 
 # identifying subpopulation column 
 subpop_column = "Ecotype"
