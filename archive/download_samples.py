@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[7]:
-
-
 # lmports
 import os
 import pandas as pd
@@ -42,10 +36,6 @@ confound_check = pd.crosstab(cleaned_df['Subpopulation'],
                              cleaned_df['Provider'], 
                              margins = True)
 print(confound_check)
-
-
-# In[18]:
-
 
 # defining the number of files to download
 sample_size = 20
@@ -156,9 +146,6 @@ print("Download complete.")
 metadata_export_path = os.path.join(local_data_dir, "downloaded_calls_metadata.csv")
 sample_calls.to_csv(metadata_export_path, index=False) # change to calls for final one
 print(f"Saved matched metadata table to {metadata_export_path}")
-
-
-# In[ ]:
 
 
 
