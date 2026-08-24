@@ -9,7 +9,7 @@ import os
 data_root = Path("subpopulation_embeddings_v2")
 csv_files = sorted(data_root.glob("*_embeddings.csv"))
 base_dir = os.path.abspath(os.path.dirname(__file__)) if '__file__' in locals() else os.getcwd()
-output_mmd = os.path.join(base_dir, "mmd_v2.csv")
+output_mmd = os.path.join(base_dir, "mmd_matrix.csv")
 
 # defining function that calculates MMD between two distributions 
 def calculate_single_mmd(X, Y, gamma = None):
