@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 # imports
 import pandas as pd
 import glob
@@ -135,7 +129,7 @@ def resample_and_bandpass(audio_file_path, target_sr=32000):
         }
 
     # going through each 15 s clip  
-    for file in wav_files:
+for file in wav_files:
 
     # resampling and bandpassing 
     resample_result = resample_and_bandpass(file, target_sr = target_sr)
@@ -147,7 +141,7 @@ def resample_and_bandpass(audio_file_path, target_sr=32000):
     clean_audio_array = resample_result["audio_data"]
 
     # checking how much of the clip is real audio vs padding 
-   expected_full_points = int(15.0 * target_sr)
+    expected_full_points = int(15.0 * target_sr)
     actual_len = len(clean_audio_array)
     if actual_len < expected_full_points:
         buffer_shortfall_sec = (expected_full_points - actual_len) / target_sr
