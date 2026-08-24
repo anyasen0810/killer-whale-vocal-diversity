@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[3]:
-
-
 # imports
 import numpy as np
 from sklearn.metrics.pairwise import rbf_kernel, euclidean_distances
@@ -18,7 +12,9 @@ base_dir = os.path.abspath(os.path.dirname(__file__)) if '__file__' in locals() 
 output_mmd = os.path.join(base_dir, "mmd_v2.csv")
 
 # defining function that calculates MMD between two distributions 
-def calculate_single_mmd(X, Y, gamma):
+def calculate_single_mmd(X, Y, gamma = None):
+    if gamma is None:
+        gamma = 1.0 / X.shape[1]
     # calculate initial kernel matrices
     k_XX = rbf_kernel(X, X, gamma=gamma)
     k_YY = rbf_kernel(Y, Y, gamma=gamma)
