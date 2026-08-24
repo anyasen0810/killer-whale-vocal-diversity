@@ -53,7 +53,7 @@ def mantel_test(matrix1, matrix2, method="spearman", n_permutations=9999, random
 
 # loading csv files 
 # reading mmd csv as a data frame 
-df_mmd_v2 = pd.read_csv("mmd_v2.csv", index_col=0)
+df_mmd_v2 = pd.read_csv("mmd_matrix.csv", index_col=0)
 # reading mtdna csv as a data frame 
 df_mtdna = pd.read_csv("mtDNA.csv", index_col=0)
 # reading nuclear csv as a dataframe 
