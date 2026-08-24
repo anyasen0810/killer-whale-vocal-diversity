@@ -1,15 +1,29 @@
-# Ignore audio files
+# Ignore audio files and audio working directories
 *.wav
 audio_test/
+data/
+cleaned_audio_v2/
 
-# Ignore metadata files
+# Ignore embeddings, UMAP outputs, and other generated data files
+subpopulation_embeddings_v2/
+umap_results/
 *.csv
 *.xlsx
 
 # Ignore virtual environments and package caches
 .DS_Store
-__pycache__/
-.venv/
+**/__pycache__/
+
+# Ignore credentials and secrets
+service_account*.json
+*key*.json
+credentials/
+*.env
+.env
+
+# Ignore OS/editor junk
+.ipynb_checkpoints/
+*.swp
 
 
 
