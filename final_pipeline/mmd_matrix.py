@@ -15,7 +15,8 @@ output_mmd = os.path.join(base_dir, "mmd_v2.csv")
 def calculate_single_mmd(X, Y, gamma = None):
     if gamma is None:
         gamma = 1.0 / X.shape[1]
-    # calculate initial kernel matrices
+        
+    # calculating initial kernel matrices
     k_XX = rbf_kernel(X, X, gamma=gamma)
     k_YY = rbf_kernel(Y, Y, gamma=gamma)
     k_XY = rbf_kernel(X, Y, gamma=gamma)
