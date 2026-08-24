@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[2]:
-
-
 # imports
 from itertools import combinations
 import numpy as np
@@ -150,34 +144,3 @@ if __name__ == "__main__":
 
     print("MMD vs mtDNA: r =", round(r1, 3), "p =", round(p1, 3))
     print("MMD vs Fst:   r =", round(r2, 3), "p =", round(p2, 3))
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
